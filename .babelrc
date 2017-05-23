@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "react",
+    ["env", {
+      "targets": {
+        "browsers": ["Chrome 58"]
+      },
+      "modules": false
+    }]
+  ],
+  "plugins": [
+    "ramda",
+    "syntax-dynamic-import"
+  ]
+}

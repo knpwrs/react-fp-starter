@@ -1,0 +1,4 @@
+extends: airbnb
+parser: babel-eslint
+rules:
+  no-underscore-dangle: ["error", { "allow": ["__"] }]
