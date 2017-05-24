@@ -10,6 +10,7 @@ const port = 8080;
 const config = {
   context,
   entry: [
+    'style-loader!css-loader!sanitize.css/sanitize.css',
     './src/index.jsx',
   ],
   resolve: {

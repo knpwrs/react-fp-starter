@@ -2,28 +2,28 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
   Redirect,
 } from 'react-router-dom';
+import g from 'glamorous';
+import Header from './components/header';
 import Home from './containers/home';
 import About from './containers/about';
 
 export default () => (
   <Router>
-    <div>
-      <header>
-        <h1>React FP Starter</h1>
-        <ul>
-          <li><Link to="/home">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-        </ul>
-      </header>
+    <g.Div
+      display="flex"
+      flexDirection="column"
+      fontFamily="sans-serif"
+      padding="0 1em"
+    >
+      <Header />
       <Switch>
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
         <Redirect to="/home" />
       </Switch>
-    </div>
+    </g.Div>
   </Router>
 );
