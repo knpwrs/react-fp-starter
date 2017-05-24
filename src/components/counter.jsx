@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers, pure } from 'recompose';
+import { pure } from 'recompose';
 
 const Counter = ({ increment, decrement, counter }) => (
   <div>
@@ -16,10 +16,4 @@ Counter.propTypes = {
   counter: PropTypes.number.isRequired,
 };
 
-export default compose(
-  pure,
-  withHandlers({
-    increment: props => () => props.increment(),
-    decrement: props => () => props.decrement(),
-  }),
-)(Counter);
+export default pure(Counter);
