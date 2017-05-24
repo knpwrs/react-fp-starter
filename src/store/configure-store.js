@@ -1,10 +1,14 @@
-import { createStore } from 'redux';
-import window from 'global/window';
-import reducer from '../reducers';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
 
-export default () => createStore(
-  reducer,
-  /* eslint-disable */
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  /* eslint-enable */
-);
+export default (rootReducer, rootSaga, initialState = {}) => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+    rootReducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(sagaMiddleware)),
+  );
+  sagaMiddleware.run(rootSaga);
+  return store;
+};

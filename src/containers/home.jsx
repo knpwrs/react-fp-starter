@@ -9,7 +9,9 @@ import Counter from '../components/counter';
 const Home = ({ counter, actions }) => (
   <Counter
     increment={actions.increment}
+    incrementAsync={actions.incrementAsync}
     decrement={actions.decrement}
+    decrementAsync={actions.decrementAsync}
     counter={counter}
   />
 );

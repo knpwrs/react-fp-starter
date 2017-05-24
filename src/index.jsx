@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import document from 'global/document';
 import Root from './root';
 import configureStore from './store/configure-store';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
-const store = configureStore();
+const store = configureStore(rootReducer, rootSaga);
 
 const el = document.createElement('div');
 document.body.appendChild(el);
