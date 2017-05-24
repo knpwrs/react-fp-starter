@@ -4,7 +4,7 @@ import { compose, withHandlers, pure } from 'recompose';
 
 const Counter = ({ increment, decrement, counter }) => (
   <div>
-    <h1>Counter: {counter}</h1>
+    <h2>Counter: {counter}</h2>
     <button onClick={increment}>+1</button>
     <button onClick={decrement}>-1</button>
   </div>

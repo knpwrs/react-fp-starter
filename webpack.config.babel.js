@@ -36,7 +36,7 @@ const config = {
 if (process.env.NODE_ENV === 'development') {
   config.devtool = 'eval-source-map';
   config.entry.unshift('react-hot-loader/patch');
-  config.output.publicPath = `http://${host}:${port}/dist/`;
+  config.output.publicPath = `http://${host}:${port}/`;
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === 'development') {
     host,
     port,
     hot: true,
+    historyApiFallback: true,
   };
 }
 
