@@ -3,6 +3,7 @@ const R = require('ramda');
 const fs = require('fs');
 const fp = require('lodash/fp');
 
+const relativeImportPattern = /import .+? from '\.\/.+?';/;
 const fileOptions = { encoding: 'utf8' };
 const namePrompt = {
   type: 'input',
@@ -10,12 +11,14 @@ const namePrompt = {
   message: 'Name',
 };
 
-const sortBlock = (pattern, contents) => {
+const insertSorted = (pattern, contents, line) => {
   const test = R.test(pattern);
   const lines = contents.split('\n');
   const start = R.findIndex(test, lines);
   const end = R.findLastIndex(test, lines) + 1;
-  const sorted = R.slice(start, end, lines).sort();
+  const unsorted = R.slice(start, end, lines);
+  unsorted.push(line);
+  const sorted = unsorted.sort();
   lines.splice(start, end - start, ...sorted);
   return lines.join('\n');
 };
@@ -70,23 +73,12 @@ module.exports = (plop) => {
       path: 'src/reducers/{{ kebabCase name }}.test.js',
       templateFile: 'templates/reducer.test.txt',
       abortOnFail: true,
-    }, {
-      type: 'modify',
-      path: 'src/reducers/index.js',
-      pattern: /((?:import .+? from '\.\/.+?;\n)+)/,
-      template: "$1import {{ camelCase name }} from './{{ kebabCase name }}';\n",
-      abortOnFail: true,
-    }, {
-      type: 'modify',
-      path: 'src/reducers/index.js',
-      pattern: /(combineReducers\(\{)/,
-      template: '$1\n  {{ camelCase name }},',
-    }, () => {
+    }, ({ name }) => {
       process.chdir(plop.getPlopfilePath());
       const file = 'src/reducers/index.js';
       const rootReducerContents = fs.readFileSync(file, fileOptions);
-      let newContents = sortBlock(/import .+? from '\.\/.+?';/, rootReducerContents);
-      newContents = sortBlock(/ {2}.+?,/, newContents);
+      let newContents = insertSorted(relativeImportPattern, rootReducerContents, `import ${fp.camelCase(name)} from './${fp.kebabCase(name)}';`);
+      newContents = insertSorted(/ {2}.+?,/, newContents, `  ${fp.camelCase(name)},`);
       fs.writeFileSync(file, newContents);
       return 'Done!';
     }],
@@ -105,24 +97,12 @@ module.exports = (plop) => {
       path: 'src/sagas/{{ kebabCase name }}.test.js',
       templateFile: 'templates/saga.test.txt',
       abortOnFail: true,
-    }, {
-      type: 'modify',
-      path: 'src/sagas/index.js',
-      pattern: /((?:import .+? from '\.\/.+?;\n)+)/,
-      template: "$1import {{ camelCase name }}Saga from './{{ kebabCase name }}';\n",
-      abortOnFail: true,
-    }, {
-      type: 'modify',
-      path: 'src/sagas/index.js',
-      pattern: /(yield fork\(.+?\);)/,
-      template: '$1\n  yield fork({{ camelCase name }}Saga);',
-      abortOnFail: true,
-    }, () => {
+    }, ({ name }) => {
       process.chdir(plop.getPlopfilePath());
       const file = 'src/sagas/index.js';
       const rootSagaContents = fs.readFileSync(file, fileOptions);
-      let newContents = sortBlock(/import .+? from '\.\/.+?';/, rootSagaContents);
-      newContents = sortBlock(/yield fork\(.+?\);/, newContents);
+      let newContents = insertSorted(relativeImportPattern, rootSagaContents, `import ${fp.camelCase(name)}Saga from './${fp.kebabCase(name)}';`);
+      newContents = insertSorted(/yield fork\(.+?\);/, newContents, `  yield fork(${fp.camelCase(name)}Saga);`);
       fs.writeFileSync(file, newContents);
       return 'Done!';
     }],
