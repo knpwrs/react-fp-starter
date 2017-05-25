@@ -8,7 +8,8 @@
     "lint": "eslint *.js src --ext .js,.jsx",
     "test": "cross-env NODE_ENV=test nyc ava",
     "test:watch": "cross-env NODE_ENV=test ava --watch",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "plop": "plop"
   },
   "ava": {
     "babel": "inherit",
