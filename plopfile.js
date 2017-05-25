@@ -73,20 +73,56 @@ module.exports = (plop) => {
     }, {
       type: 'modify',
       path: 'src/reducers/index.js',
-      pattern: /(combineReducers\(\{)/,
-      template: '$1\n  {{ camelCase name }},',
-    }, {
-      type: 'modify',
-      path: 'src/reducers/index.js',
       pattern: /((?:import .+? from '\.\/.+?;\n)+)/,
       template: "$1import {{ camelCase name }} from './{{ kebabCase name }}';\n",
       abortOnFail: true,
+    }, {
+      type: 'modify',
+      path: 'src/reducers/index.js',
+      pattern: /(combineReducers\(\{)/,
+      template: '$1\n  {{ camelCase name }},',
     }, () => {
       process.chdir(plop.getPlopfilePath());
       const file = 'src/reducers/index.js';
-      const rootReducerContents = fs.readFileSync('src/reducers/index.js', fileOptions);
+      const rootReducerContents = fs.readFileSync(file, fileOptions);
       let newContents = sortBlock(/import .+? from '\.\/.+?';/, rootReducerContents);
       newContents = sortBlock(/ {2}.+?,/, newContents);
+      fs.writeFileSync(file, newContents);
+      return 'Done!';
+    }],
+  });
+
+  plop.setGenerator('saga', {
+    description: 'Redux Saga',
+    prompts: [namePrompt],
+    actions: [{
+      type: 'add',
+      path: 'src/sagas/{{ kebabCase name }}.js',
+      templateFile: 'templates/saga.txt',
+      abortOnFail: true,
+    }, {
+      type: 'add',
+      path: 'src/sagas/{{ kebabCase name }}.test.js',
+      templateFile: 'templates/saga.test.txt',
+      abortOnFail: true,
+    }, {
+      type: 'modify',
+      path: 'src/sagas/index.js',
+      pattern: /((?:import .+? from '\.\/.+?;\n)+)/,
+      template: "$1import {{ camelCase name }}Saga from './{{ kebabCase name }}';\n",
+      abortOnFail: true,
+    }, {
+      type: 'modify',
+      path: 'src/sagas/index.js',
+      pattern: /(yield fork\(.+?\);)/,
+      template: '$1\n  yield fork({{ camelCase name }}Saga);',
+      abortOnFail: true,
+    }, () => {
+      process.chdir(plop.getPlopfilePath());
+      const file = 'src/sagas/index.js';
+      const rootSagaContents = fs.readFileSync(file, fileOptions);
+      let newContents = sortBlock(/import .+? from '\.\/.+?';/, rootSagaContents);
+      newContents = sortBlock(/yield fork\(.+?\);/, newContents);
       fs.writeFileSync(file, newContents);
       return 'Done!';
     }],
