@@ -1,0 +1,15 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { pure } from 'recompose';
+
+export const Bare = ({ message }) => (
+  <div>
+    <h2>{ message }</h2>
+  </div>
+);
+
+Bare.propTypes = {
+  message: PropTypes.string.isRequired,
+};
+
+export default pure(Bare);

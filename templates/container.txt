@@ -1,0 +1,27 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { compose, pure } from 'recompose';
+import * as {{ camelCase actions }}Actions from '../actions/{{ kebabCase actions }}';
+
+const {{ upperCamelCase name }} = ({ {{ camelCase reducer }}, actions }) => (
+  <h2>{{ upperCamelCase name }}</h2>
+);
+
+{{ upperCamelCase name }}.propTypes = {
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+};
+
+const mapStateToProps = ({ {{ camelCase reducer }} }) => ({
+  {{ camelCase reducer }},
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({{ camelCase actions }}Actions, dispatch),
+});
+
+export default compose(
+  pure,
+  connect(mapStateToProps, mapDispatchToProps),
+)({{ upperCamelCase name }});

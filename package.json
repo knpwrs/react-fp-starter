@@ -5,7 +5,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "lint": "eslint src --ext .js,.jsx",
+    "lint": "eslint *.js src --ext .js,.jsx",
     "test": "cross-env NODE_ENV=test nyc ava",
     "test:watch": "cross-env NODE_ENV=test ava --watch",
     "posttest": "npm run lint"
@@ -64,7 +64,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
+    "lodash": "^4.17.4",
     "nyc": "^10.3.2",
+    "plop": "^1.7.4",
     "react-test-renderer": "^15.5.4",
     "style-loader": "^0.18.1",
     "webpack": "^2.5.1",

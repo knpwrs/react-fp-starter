@@ -1,0 +1,13 @@
+/* eslint-disable react/jsx-filename-extension */
+// https://github.com/avajs/ava/issues/631
+import test from 'ava';
+import React from 'react';
+import render from 'react-test-renderer';
+import { Bare as {{ upperCamelCase name }} } from './{{ kebabCase name }}';
+
+test('counter', (t) => {
+  const tree = render.create(
+    <{{ upperCamelCase name }} />,
+  );
+  t.snapshot(tree);
+});

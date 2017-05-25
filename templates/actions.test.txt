@@ -1,0 +1,19 @@
+import test from 'ava';
+import {
+  increment,
+  decrement,
+} from './{{ kebabCase name }}';
+
+test('increment', (t) => {
+  t.deepEqual(increment(), {
+    type: 'INCREMENT',
+    payload: true,
+  });
+});
+
+test('decrement', (t) => {
+  t.deepEqual(decrement(), {
+    type: 'DECREMENT',
+    payload: true,
+  });
+});

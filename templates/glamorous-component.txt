@@ -1,0 +1,8 @@
+import g from 'glamorous';
+import { pure } from 'recompose';
+
+export const Bare = g.div({
+  color: 'red',
+});
+
+export default pure(Bare);
