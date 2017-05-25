@@ -17,8 +17,8 @@ than [`redux-thunk`] but is ultimately more flexible and easier to test.
 
 ### [`plop`] generators for components, reducers, sagas, and actions
 
-Run `npm run plop` to get a menu of generators. You can also run `npm run plop
-<generator>` (e.g., `npm run plop reducer`) to skip directly to a generator. New
+Run `yarn plop` to get a menu of generators. You can also run `yarn plop
+<generator>` (e.g., `yarn plop reducer`) to skip directly to a generator. New
 files will be created with correct casings no matter what you enter for the
 name. When you generate reducers and sagas they will automatically be imported
 and inserted into the root reducers and sagas in alphabetical order.
@@ -26,8 +26,14 @@ and inserted into the root reducers and sagas in alphabetical order.
 ### [`direnv`] node layout
 
 If you have [`direnv`] installed you can use the executables in
-`node_modules/.bin` directly. Instead of running `npm run plop reducer` you can
+`node_modules/.bin` directly. Instead of running `yarn plop reducer` you can
 just run `plop reducer`.
+
+### [`yarn`]
+
+There is a `yarn.lock` file in the root of this repo that is guaranteed to
+resolve dependencies that work with each other. If you want to update your
+dependencies you can `rm yarn.lock` and run `yarn`.
 
 ### Functional components with [`recompose`]
 
@@ -61,7 +67,7 @@ the [`webpack`] configuration.
 practices for functional programming by automatically running your tests in
 parallel. Code coverage reports are generated using [`nyc`]. React components
 are tested using [snapshots][ava-snapshots]. To run tests and generate coverage
-reports, use `npm test`. To run tests continually while you code run `npm run
+reports, use `yarn test`. To run tests continually while you code run `yarn run
 test:watch`.
 
 ### Linting with [`eslint`] and [`eslint-config-airbnb`]
@@ -117,5 +123,6 @@ MIT
 [`sanitize.css`]: https://www.npmjs.com/package/sanitize.css
 [`styled-components`]: https://www.npmjs.com/package/styled-components "styled-components"
 [`webpack`]: https://webpack.js.org/ "webpack"
+[`yarn`]: https://yarnpkg.com/ "yarn"
 [ava-snapshots]: https://github.com/avajs/ava#snapshot-testing "AVA Snapshot Testing"
 [webpack-dynamic-import]: https://github.com/webpack-contrib/babili-webpack-plugin/pull/39 "babili-webpack-plugin #39"
