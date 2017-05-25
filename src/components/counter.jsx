@@ -8,7 +8,7 @@ const CounterButton = g.button({
   marginRight: '1em',
 });
 
-const Counter = ({ increment, incrementAsync, decrement, decrementAsync, counter }) => (
+export const Bare = ({ increment, incrementAsync, decrement, decrementAsync, counter }) => (
   <div>
     <h2>Counter: {counter}</h2>
     <CounterButton onClick={increment}>+1</CounterButton>
@@ -18,7 +18,7 @@ const Counter = ({ increment, incrementAsync, decrement, decrementAsync, counter
   </div>
 );
 
-Counter.propTypes = {
+Bare.propTypes = {
   increment: PropTypes.func.isRequired,
   incrementAsync: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
@@ -26,4 +26,4 @@ Counter.propTypes = {
   counter: PropTypes.number.isRequired,
 };
 
-export default pure(Counter);
+export default pure(Bare);

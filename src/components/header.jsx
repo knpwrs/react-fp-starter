@@ -13,7 +13,7 @@ const HeaderLink = StyledLink({
   },
 });
 
-const Header = () => (
+export const Bare = () => (
   <g.Header
     display="flex"
     alignItems="center"
@@ -28,4 +28,4 @@ const Header = () => (
   </g.Header>
 );
 
-export default pure(Header);
+export default pure(Bare);

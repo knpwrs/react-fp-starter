@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`counter 1`] = `
+<div>
+  <h2>
+    Counter: 
+    15
+  </h2>
+  <button
+    className="css-jltz2k"
+    onClick={[Function]}
+  >
+    +1
+  </button>
+  <button
+    className="css-jltz2k"
+    onClick={[Function]}
+  >
+    +1 Aysnc
+  </button>
+  <button
+    className="css-jltz2k"
+    onClick={[Function]}
+  >
+    -1
+  </button>
+  <button
+    className="css-jltz2k"
+    onClick={[Function]}
+  >
+    -1 Async
+  </button>
+</div>
+`;

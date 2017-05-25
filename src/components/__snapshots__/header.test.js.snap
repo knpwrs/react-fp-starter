@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`counter 1`] = `
+<header
+  className="css-12alag6"
+>
+  <h1>
+    React FP Starter
+  </h1>
+  <nav
+    className="css-omocl"
+  >
+    <a
+      className="css-j5mfvq"
+      href={true}
+      onClick={[Function]}
+    >
+      Home
+    </a>
+    <a
+      className="css-j5mfvq"
+      href={true}
+      onClick={[Function]}
+    >
+      About
+    </a>
+  </nav>
+</header>
+`;

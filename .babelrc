@@ -12,5 +12,10 @@
   "plugins": [
     "ramda",
     "syntax-dynamic-import"
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
 }
