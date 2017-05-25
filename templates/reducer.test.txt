@@ -7,7 +7,7 @@ import {
 } from '../actions/counter';
 
 test('initial state', (t) => {
-  const state = counterReducer(undefined, { type: '@@INIT' });
+  const state = {{ camelCase name }}Reducer(undefined, { type: '@@INIT' });
   t.is(state, 0);
 });
 
