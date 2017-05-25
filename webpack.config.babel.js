@@ -1,3 +1,5 @@
+// Import statments are not used despite the .babel.js extension so that wepback
+// can handle modules for the application (see .babelrc).
 const webpack = require('webpack');
 const { join } = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
