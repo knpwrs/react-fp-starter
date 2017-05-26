@@ -34,12 +34,12 @@ module.exports = (plop) => {
     actions: [{
       type: 'add',
       path: 'src/components/{{ kebabCase name }}.jsx',
-      templateFile: 'templates/component.txt',
+      templateFile: '.plop/component.txt',
       abortOnFail: true,
     }, {
       type: 'add',
       path: 'src/components/{{ kebabCase name }}.test.js',
-      templateFile: 'templates/component.test.txt',
+      templateFile: '.plop/component.test.txt',
       abortOnFail: true,
     }],
   });
@@ -50,12 +50,12 @@ module.exports = (plop) => {
     actions: [{
       type: 'add',
       path: 'src/components/{{ kebabCase name }}.jsx',
-      templateFile: 'templates/glamorous-component.txt',
+      templateFile: '.plop/glamorous-component.txt',
       abortOnFail: true,
     }, {
       type: 'add',
       path: 'src/components/{{ kebabCase name }}.test.js',
-      templateFile: 'templates/component.test.txt',
+      templateFile: '.plop/component.test.txt',
       abortOnFail: true,
     }],
   });
@@ -66,12 +66,12 @@ module.exports = (plop) => {
     actions: [{
       type: 'add',
       path: 'src/reducers/{{ kebabCase name }}.js',
-      templateFile: 'templates/reducer.txt',
+      templateFile: '.plop/reducer.txt',
       abortOnFail: true,
     }, {
       type: 'add',
       path: 'src/reducers/{{ kebabCase name }}.test.js',
-      templateFile: 'templates/reducer.test.txt',
+      templateFile: '.plop/reducer.test.txt',
       abortOnFail: true,
     }, ({ name }) => {
       process.chdir(plop.getPlopfilePath());
@@ -90,12 +90,12 @@ module.exports = (plop) => {
     actions: [{
       type: 'add',
       path: 'src/sagas/{{ kebabCase name }}.js',
-      templateFile: 'templates/saga.txt',
+      templateFile: '.plop/saga.txt',
       abortOnFail: true,
     }, {
       type: 'add',
       path: 'src/sagas/{{ kebabCase name }}.test.js',
-      templateFile: 'templates/saga.test.txt',
+      templateFile: '.plop/saga.test.txt',
       abortOnFail: true,
     }, ({ name }) => {
       process.chdir(plop.getPlopfilePath());
@@ -114,12 +114,12 @@ module.exports = (plop) => {
     actions: [{
       type: 'add',
       path: 'src/actions/{{ kebabCase name}}.js',
-      templateFile: 'templates/actions.txt',
+      templateFile: '.plop/actions.txt',
       abortOnFail: true,
     }, {
       type: 'add',
       path: 'src/actions/{{ kebabCase name}}.test.js',
-      templateFile: 'templates/actions.test.txt',
+      templateFile: '.plop/actions.test.txt',
       abortOnFail: true,
     }],
   });
@@ -138,7 +138,7 @@ module.exports = (plop) => {
     actions: [{
       type: 'add',
       path: 'src/containers/{{ kebabCase name }}.jsx',
-      templateFile: 'templates/container.txt',
+      templateFile: '.plop/container.txt',
       abortOnFail: true,
     }],
   });
