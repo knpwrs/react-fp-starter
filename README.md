@@ -95,6 +95,122 @@ Components and reducers are hot loaded while you code. Hot loading is not the
 same as live reloading, your application is updated in place and state is
 maintained.
 
+## How-To...
+
+### Get Started
+
+Install and run [`yarn`] to install dependencies and then run `yarn dev` to
+start a development server. The server is configured to use port `8080` by
+default. You can set the port in `webpack.config.babel.js`.
+
+### Add New Features
+
+Use `yarn plop` to generate (glamorous) components, reducers, sagas, action
+creators, or containers. When you generate a reducer or saga import statements
+will automatically be added in alphabetical order to the respective root reducer
+or saga files and the reducer or saga will be added in alphabetical order to the
+root reducer or saga.
+
+### Understanding What's Going On
+
+#### Action Creators
+
+Action creators are stored in `src/actions`. They are functions which return
+flux standard actions (JavaScript objects with up to three properties: `type`,
+`payload`, and optionally `error`). These actions are dispatched into [`redux`]
+reducers which return new or old state. See [`redux-actions`] for more
+information.
+
+#### Reducers
+
+Reducers are stored in `src/reducers`. They are functions which take the current
+state and an action and return either a new state or the old state. Reducers
+never mutate their state argument. Reducers are all combined into a single root
+reducer in `src/reducers/index.js`. This single root reducer is what [`redux`]
+uses to create the store. The reducers in this project are created with helper
+functions from [`redux-actions`]. See [`redux`] and [`redux-actions`] for more
+information.
+
+#### Sagas
+
+Sagas are generator functions which can `yield` effects. The [`redux-saga`]
+middleware will handle actions before they reach the [`redux`] reducers. Sagas
+are most useful for handling side effects, including asynchronous side effects,
+in a simple, flexible, and testable way. See [`redux-saga`] for more
+information.
+
+#### Components
+
+React components are stored in `src/components`. Components in this project are
+pure, stateless functions which accept a single props argument representing the
+component's props. Components can be enhanced with higher-order components from
+the [`recompose`] library.
+
+#### Containers
+
+Containers are just components which listen to the [`redux`] store. Most
+components in your application should be functional stateless components which
+receive information via their props argument. Containers are bound to the
+[`redux`] store using the [`react-redux`] library. The [`react-redux`] library
+provides a `Provider` component which makes the store available to connected
+components. Components become connected via the `connect` higher-order component
+provided by [`react-redux`].
+
+#### Example: Increment Button
+
+First, take a look at `src/actions/counter.js`. The action we are interested in
+is `increment`, an exported constant. The action creator is defined with
+`createAction` from the [`redux-actions`] package. The first argument defines
+the type of action the action creator will create. The second argument is a
+payload customizer function. We use `R.T`, a function from [`ramda`] which
+always returns `true`. We use this as our payload customizer so that any
+arguments passed to the action creator are ignored. The side effect of using
+`R.T` is that the payload will literally be `true`, which is fine for our
+purposes. Without a payload customizer the first argument passed to the action
+creator will become the action's payload. When used with React as an event
+handler, that means React's synthetic event will become the payload. We want to
+avoid this because it is not safe to keep React's synthetic events around. This
+is why we use `R.T` as the payload customizer.
+
+Next, take a look at the home route / counter container at
+`src/containers/home.jsx`. A container, you will recall, is just a component
+which is bound to a redux store. Binding to the [`redux`] store is done in
+combination with the `Provider` component and `connect` higher-order component
+from the [`react-redux`] package. The `Provider` component is used in
+`src/index.jsx` whereas the `connect` higher-order component is used directly in
+the container files.
+
+The container is made of three parts: a component, a function which maps
+[`redux`] store state to props on the component, and a function which maps
+action creators to props on the component. The first function,
+`mapStateToProps`, takes the entire state from [`redux`] and returns an object,
+the key/value pairs of which will be passed as props to the component. The
+second function, `mapDispatchToProps`, takes one argument, the `dispatch`
+function from the [`redux`] store, and returns an object, the key/value pairs of
+which will be passed as props to the component. The values returned from the
+second function should be functions that dispatch actions into the redux store,
+using the passed `dispatch` function. There is a function exported from
+[`redux`], `bindActionCreators`, which helps with this. See the implementation
+of `mapDispatchToProps` for details.
+
+The `Home` container passes the state from [`redux`] as well as the bound action
+creators to the `Counter` component defined in `src/components/counter.jsx`. The
+`Counter` component then takes the bound `increment` action creator and uses it
+as a click handler for the `+1` button. When the user presses `+1`, an
+`INCREMENT` action will be dispatched into the [`redux`] store.
+
+The [`redux`] store is powered by the root reducer defined in
+`src/reducers/index.js`. A reducer is just a function which takes the state and
+an action as arguments and returns either the old state or a new state. A
+reducer never mutates the state. The root reducer is defined with the
+`combineReducers` function from [`redux`] by constructing an object of reducers.
+The root reducer is just like any other reducer, except it passes all actions
+passed to it to child reducers and sets
+
+// TODO: Rewrite that last paragraph
+
+#### Example: Asynchronous Increment Button
+
 ## License
 
 MIT
@@ -112,6 +228,7 @@ MIT
 [`glamorous`]: https://www.npmjs.com/package/glamorous "glamorous"
 [`nyc`]: https://www.npmjs.com/package/nyc "nyc"
 [`plop`]: https://www.npmjs.com/package/plop
+[`react-redux`]: https://www.npmjs.com/package/react-redux "react-redux"
 [`react-router`]: https://reacttraining.com/react-router/web "react-router-dom"
 [`react`]: https://facebook.github.io/react/ "React"
 [`recompose`]: https://github.com/acdlite/recompose "recompose"
