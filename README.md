@@ -1,5 +1,7 @@
 # react-fp-starter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/knpwrs/react-fp-starter.svg)](https://greenkeeper.io/)
+
 An opinionated starter project for React. All of the major decisions are made
 for you, but the boilerplate itself is still lightweight and the build internals
 are not hidden from you if you want to change anything.
